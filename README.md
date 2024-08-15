@@ -31,7 +31,7 @@ the `R`packages used were:
 
 **The end result:**
 
-![EDU_INVESTMENT_MAP](https://github.com/michelleg06/DataViz/blob/main/images/bar_plot_with_flags.png)
+![EDU_INVESTMENT_MAP]([(https://github.com/michelleg06/OECD_EDU_dataviz/blob/main/images/inv_edu_cloropleth.pdf])
 
 **Code snippet**
 
