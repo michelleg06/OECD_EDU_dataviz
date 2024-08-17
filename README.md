@@ -175,3 +175,20 @@ print(map_w_logo)
 ggsave("inv_edu_cloropleth.pdf", map_w_logo)
 
 ```
+-----
+### Lineplots Scatterplots: Exploring the various dimensions of the PISA dataset
+
+the `R`packages used were: 
+
+* {[ggplot2](https://ggplot2.tidyverse.org/)}: a system for declaratively creating graphics, based on [The Grammar of Graphics](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448/ref=as_li_ss_tl).
+
+* {[dplyr](https://stringr.tidyverse.org/articles/from-base.html):} dplyr is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges.
+
+* {[learningtower](https://cran.r-project.org/web/packages/learningtower/index.html):} OECD PISA Datasets from 2000-2018 in an Easy-to-Use Format.
+
+* {[ggtext](https://cran.r-project.org/web/packages/ggtext/index.html):} A 'ggplot2' extension that enables the rendering of complex formatted plot labels.
+
+* {[ggrepel](https://ggrepel.slowkow.com/):} provides geoms for ggplot2 to repel overlapping text labels.
+
+**The graphs:**
+
