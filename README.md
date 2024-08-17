@@ -33,6 +33,10 @@ the `R`packages used were:
 
 ![EDU_INVESTMENT_MAP](https://github.com/michelleg06/OECD_EDU_dataviz/blob/main/images/inv_edu_cloropleth2.png)
 
+**A comment:**
+Perhaps what I find most interest from the visualisation above, is that the countries that have invested the most in Education in the last years (as a percentage of their GDP) are in South America (Argentina, Brazil) and South Africa. These are not countries with the highest PISA outcomes. It made me think of the old adage "quality over quantity". An idea that has been extensively explored in the literature by Eric Hanushek (e.g., [2007](https://hanushek.stanford.edu/publications/education-quality-and-economic-growth)). It is not only enough to financially invest in education, we also need to mobilise the invested resources efficiently, and increase budget transparency and equitable spending. Almost 20 years later, this [World Bank Blog on Education Finance](https://www.worldbank.org/en/topic/education/brief/education-finance-using-money-effectively-is-critical-to-improving-education) still emphasises those points. 
+
+
 **Code snippet**
 
 ```r
