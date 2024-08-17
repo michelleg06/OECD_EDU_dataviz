@@ -192,3 +192,11 @@ the `R`packages used were:
 
 **The graphs:**
 
+![lineplot](https://github.com/michelleg06/OECD_EDU_dataviz/blob/main/images/p.png)
+
+**A comment:**
+Lineplots are a great way to visualise time trends. For the above plot, I selected 6 OECD countries at random, two of which are considered emerging markets and the rest developed economies. There are two very stark trends. First, the maths performance gap between emerging and developed economies is slowly decreasing, but remains salient. Second, whilst students from emerging economies seem to be improving over time, the opposite has happened for students in advanced economies! 
+
+What else could we get from these data?
+
+
