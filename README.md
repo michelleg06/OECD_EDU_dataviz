@@ -37,7 +37,7 @@ the `R`packages used were:
 Perhaps what I find most interest from the visualisation above, is that the countries that have invested the most in Education in the last years (as a percentage of their GDP) are in South America (Argentina, Brazil) and South Africa. These are not countries with the highest PISA outcomes. It made me think of the old adage "quality over quantity". An idea that has been extensively explored in the literature by Eric Hanushek (e.g., [2007](https://hanushek.stanford.edu/publications/education-quality-and-economic-growth)). It is not only enough to financially invest in education, we also need to mobilise the invested resources efficiently, and increase budget transparency and equitable spending. Almost 20 years later, this [World Bank Blog on Education Finance](https://www.worldbank.org/en/topic/education/brief/education-finance-using-money-effectively-is-critical-to-improving-education) still emphasises those points. 
 
 
-**Code snippet**
+**Code snippet:**
 
 ```r
 oecd_invest_df <- read_csv("~/Desktop/OECD.EDU_investment.csv", )
@@ -199,4 +199,96 @@ Lineplots are a great way to visualise time trends. For the above plot, I select
 
 What else could we get from these data?
 
+![scatterplots](https://github.com/michelleg06/OECD_EDU_dataviz/blob/main/images/trends.png)
+
+**A comment:**
+The scatterplots above shows a stark correlation between students' performance in maths and their economic, social, and cultural status. In turn, a student's ESCS index is correlated to the development status of a country. So, guaranteeing the well-being of a student can significantly improve their learning capacity. This association is not a new finding, many studies have looked at it from a correlational and even causal lens (e.g. [Yakovlev and  Leguizamon (2012](https://www.sciencedirect.com/science/article/pii/S1053535712001035?casa_token=hr8QCOmUWxIAAAAA:AESVTCc2y-UJZr1H_zvi1mWrQWMLoDBkheMxCvyjUjWdcvFHo0uyg9b7vy5O8KL5Kw_q-DMyXpI)); nonetheless, the composite index measured by the OECD is one of the first that attempts to understand the relationship between multidimensional well-being and education (since it is collected under the PISA assessment). An interesting note on the scatterplot on Panel B: by replacing the geom dot for the year label, we can get an impression of what we more easily observed with the line plot: the best (maths) performing years for developed economies are in the past, whereas for emerging economies' students, their best performing years are more recent. 
+
+
+**Code snippet**
+
+```r
+# student data
+student_data_all <- load_student("all")
+
+
+student_subset <- student_data_all |>
+                            group_by(year,country) |>
+                            summarize(
+    mean_math = mean(math, na.rm = TRUE),
+    mean_read = mean(read, na.rm = TRUE),
+    mean_escs = mean(escs, na.rm = TRUE)
+  )
+
+# selected countries
+
+student_subset <- subset(student_subset, student_subset$country=="BRA"|student_subset$country=="CAN" | student_subset$country=="MEX" | student_subset$country=="FRA" | student_subset$country=="GBR"| student_subset$country=="ESP")
+
+# line plot
+
+p <- student_subset |>
+  ggplot() +
+  geom_line(aes(x = year, y = mean_math, color = country, group = country)) +
+  labs(
+    title = "Performance in Mathematics PISA assessment",
+    subtitle = "Data was obtained from the <span style='font-family:Courier; background-color:#f0f0f0; padding:2px 4px; border-radius:3px; border:1px solid #d3d3d3;'>learningtower</span> R package which provides a clean panel dataset from the <span style='color:cornflowerblue'>OECD's PISA international student assessment</span>. Graph shows pooled results between the years 2000 and 2018."
+  ) +
+  theme_minimal() +  # Place theme_minimal() before custom theme adjustments
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    plot.subtitle = ggtext::element_textbox_simple(size = 10, color = "gray")
+  ) +
+  labs(
+      x = "Year",      
+      y = "Mathematics Score (country average)",             
+      colour = "Country Name"
+  )
+
+
+print(p)
+ggsave("p.png", p)
+
+
+
+# # # relationship with socioeconomic status
+
+
+p2 <- student_subset |>
+            ggplot(aes(x = mean_math, y = mean_escs, colour = country)) +
+            geom_point() +
+            theme_minimal() +
+            labs(
+                x = "Mathematics Score (country average)",      
+                y = "ESCS Score (country average)",             
+                colour = "Country Name"            
+            )
+        
+print(p2)
+ggsave("math_escs.png", p2)
+
+
+p2.1 <- student_subset |>
+    ggplot(aes(x = mean_math, y = mean_escs, colour = country, label = year)) +
+    geom_text_repel(size = 3, show.legend = FALSE) +  # Avoid showing legend for text
+    geom_point(aes(colour = country), size = 0, shape = 16, show.legend = TRUE) +  # Add invisible points for legend
+    theme_minimal() +
+    guides(
+        colour = guide_legend(
+            override.aes = list(label = NULL, size = 5, shape = 16)
+        )
+    ) +
+    labs(
+                x = "Mathematics Score (country average)",      
+                y = "ESCS Score (country average)",             
+                colour = "Country Name"            
+            )
+
+print(p2.1)
+
+grid.arrange(p2, p2.1)
+
+ggsave("maths_yearlegend.png",p2.1)
+
+
+```
 
